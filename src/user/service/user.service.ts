@@ -23,6 +23,7 @@ export class UserService {
                     newUser.email = users.email;
                     newUser.password = passwordHash;
                     newUser.phone = users.phone;
+                    newUser.role= users.role;
          
                     return from(this.userRepository.save(newUser)).pipe(
                         map((users: User) => {
@@ -33,6 +34,13 @@ export class UserService {
                     )
                 })
             )   
+         }
+
+         updateRoleOfUser(id :number ,users :User):Observable<any>{
+
+            return from(this.userRepository.update(id,users));
+
+
          }
          
          findOne(id): Observable<User> {
@@ -61,7 +69,7 @@ export class UserService {
             delete users.email;
             delete users.password;
          
-            return from(this.userRepository.update(id, users));
+            return from(this.userRepository.update(id,users));
          }
          
          login(users: User): Observable<string> {

@@ -1,4 +1,5 @@
 import { BeforeInsert, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { UserRole } from "./user.entity";
 
 @Entity('user')
 export class UserEntity {
@@ -12,6 +13,8 @@ export class UserEntity {
     email:string;
     @Column()
     password:string;
+    @Column({type:'enum',enum:UserRole,default: UserRole.USER})
+     role:UserRole;
     @Column()
     phone:number;
     @BeforeInsert()
